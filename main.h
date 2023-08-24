@@ -12,18 +12,18 @@
 #define FLAG_MINUS (1 << 4)  // Flag for '-'
 
 /**Sizes**/
-#define SIZE_SHORT (1 << 0)
-#define SIZE_LONG (1 << 1)
+#define L_SHORT (1 << 0)
+#define L_LONG (1 << 1)
 
 /**functions)**/
 int handle_flags(const char *format, int *p)
 int handle_precision(const char *format, int *p, va_list list)
-int handle_size(const char *format, int *p)
+int handle_length(const char *format, int *p)
 int handle_width(const char *format, int *p, va_list list)
 
-int char_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
-int string_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
-int percent_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int char_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int string_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int percent_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 
 int _printf(const char *format, ...);
 int _putchar(char c);

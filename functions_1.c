@@ -9,15 +9,15 @@
  * @format_flags: for formatting flags
  * @width: minimum width of field
  * @precision: precision value
- * @size: size of the specifier
+ * @length: length of the specifier
  * Return: Number of characters written
  */
 
-int char_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int char_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	char c = va_arg(args, int);
 
-	return (format_and_write_char(c, buffer_output, format_flags, width, precision, size);
+	return (format_and_write_char(c, buffer_output, format_flags, width, precision, length);
 }
 
 /************************PRINTS STRINGS*******************/
@@ -32,7 +32,7 @@ int char_print(va_list args, char buffer_output[], int format_flags, int width, 
  *
  */
 
-int string_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int string_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	int str_length = 0, j;
 	char *str_data = va_arg(args, char *);
@@ -41,7 +41,7 @@ int string_print(va_list args, char buffer_output[], int format_flags, int width
 	UNUSED(format_flags);
 	UNUSED(width);
 	UNUSED(precision);
-	UNUSED(size);
+	UNUSED(length);
 
 	if (str_data == NULL)
 	{
@@ -87,14 +87,14 @@ int string_print(va_list args, char buffer_output[], int format_flags, int width
  *
  */
 
-int percent_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int percent_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	UNUSED(args);
 	UNUSED(buffer_output);
 	UNUSED(format_flags);
 	UNUSED(width);
 	UNUSED(precision);
-	UNUSED(size);
+	UNUSED(length);
 
 	char percent_character = '%';
 
