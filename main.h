@@ -4,6 +4,8 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+#define BUFFER_SIZE 1024
+
 /**FLAGS**/
 #define FLAG_PLUS  (1 << 0)  // Flag for '+'
 #define FLAG_SPACE (1 << 1)  // Flag for 'space'
