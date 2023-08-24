@@ -58,7 +58,7 @@ int string_print(va_list args, char buffer_output[], int format_flags, int width
 
 	if (width > str_length)
 	{
-		if (format_flags & FLAG_LEFT)
+		if (format_flags & FLAG_MINUS)
 		{
 			write(1, &str_data[0], str_length);
 			for (j = width - str_length; j > 0; j--)

@@ -5,7 +5,25 @@
 #include <unistd.h>
 
 /**FLAGS**/
-#define FLAG_LEFT 1
+#define FLAG_PLUS  (1 << 0)  // Flag for '+'
+#define FLAG_SPACE (1 << 1)  // Flag for 'space'
+#define FLAG_HASH  (1 << 2)  // Flag for '#'
+#define FLAG_ZERO  (1 << 3)  // Flag for '0'
+#define FLAG_MINUS (1 << 4)  // Flag for '-'
+
+/**Sizes**/
+#define SIZE_SHORT (1 << 0)
+#define SIZE_LONG (1 << 1)
+
+/**functions)**/
+int handle_flags(const char *format, int *p)
+int handle_precision(const char *format, int *p, va_list list)
+int handle_size(const char *format, int *p)
+int handle_width(const char *format, int *p, va_list list)
+
+int char_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int string_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int percent_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
 
 int _printf(const char *format, ...);
 int _putchar(char c);
