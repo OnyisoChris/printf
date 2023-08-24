@@ -102,3 +102,87 @@ int percent_print(va_list args, char buffer_output[], int format_flags, int widt
 
 	return write_chars;
 }
+
+/****************************PRINTS INTEGER*******************/
+
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+int int_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+{
+	int j = BUFFER_SIZE - 2;
+	int negative_i = 0;
+	long int num = va_arg(args, long int);
+	unsigned long int n;
+
+	num = modify_size(num, size);
+
+	if (num == 0)
+		buffer_output[j--] = '0';
+
+	buffer_output[BUFFER_SIZE - 1] = '\0';
+	n = (unsigned long int)num;
+
+	if (num < 0) {
+		n = (unsigned long int)(-1) * num;
+		negative_i = 1;
+	}
+
+	while (n > 0) {
+		buffer_output[j--] = (n % 10) + '0';
+		n /= 10;
+	}
+
+	j++;
+
+	return formatted_number(negative_i, j, buffer_output, format_flags, width, precision, size);
+}
+
+/***************PRINTS BINARY***********************/
+
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+int binary_print(va_list args, char buf[], int flags, int width, int precision, int size)
+{
+	unsigned int num, i, j, sum;
+	unsigned int binary_dig[32];
+	int print_count;
+
+	UNUSED(flags);
+	UNUSED(width);
+	UNUSED(precision);
+	UNUSED(size);
+
+	num = va_arg(args, unsigned int);
+	i = 2147483648;
+	binary_dig[0] = num / i;
+	for (j = 1; j < 32; j++)
+	{
+		i /= 2;
+		binary_dig[j] = (num / i) % 2;
+	}
+	for (j = 0, sum = 0, print_count = 0; j < 32; j++)
+	{
+		sum += binary_dig[j];
+		if (sum || j == 31)
+		{
+			char binary_char = '0' + binary_dig[j];
+			write(1, &binary_char, 1);
+			print_count++;
+		}
+	}
+	return (print_count);
+}
