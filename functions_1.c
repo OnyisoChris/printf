@@ -114,7 +114,7 @@ int percent_print(va_list args, char buffer_output[], int format_flags, int widt
  *
  */
 
-int int_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int int_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	int j = BUFFER_SIZE - 2;
 	int negative_i = 0;

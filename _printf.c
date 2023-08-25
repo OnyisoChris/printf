@@ -1,6 +1,6 @@
 #include "main.h"
 
-void print_buff(char buffer[], int *buffer_i);
+void print_buff(char buffer_output[], int *buffer_i);
 
 /**
  * _printf - print an output and write it to standard output
@@ -14,7 +14,7 @@ int _printf(const char *format, ...)
 	int format_flags, width, precision, length, buffer_i = 0;
 
 	va_list list;
-	char buffer[BUFFER_SIZE];
+	char buffer_output[BUFFER_SIZE];
 
 	if (format == NULL)
 		return (-1);
@@ -25,20 +25,20 @@ int _printf(const char *format, ...)
 	{
 		if (format[x] != '%')
 		{
-			buffer[buffer_i++] = format[x];
+			buffer_output[buffer_i++] = format[x];
 			if (buffer_i == BUFFER_SIZE)
-				print_buff(buffer, &buffer_i);
+				print_buff(buffer_output, &buffer_i);
 			chars_prnt++;
 		}
 		else
 		{
-			print_buff(buffer, &buffer_i);
+			print_buff(buffer_output, &buffer_i);
 			format_flags = handle_flags(format, &x);
 			width = handle_width(format, &x, list);
 			precision = handle_precision(format, &x, list);
 			length = handle_length(format, &x);
 			++x;
-			prnt = handle_print(format, &x, list, buffer,
+			prnt = handle_print(format, &x, list, buffer_output,
 				format_flags, width, precision, length);
 			if (prnt == -1)
 				return (-1);
@@ -46,7 +46,7 @@ int _printf(const char *format, ...)
 		}
 	}
 
-	print_buff(buffer, &buffer_i);
+	print_buff(buffer_output, &buffer_i);
 
 	va_end(list);
 
@@ -55,13 +55,13 @@ int _printf(const char *format, ...)
 
 /**
  * print_buff - Prints the contents of the buffer if it exist
- * @buffer: Array of chars
+ * @buffer_output: Array of chars
  * @buffer_i: Index at which to add next char, represents the length.
  */
-void print_buff(char buffer[], int *buffer_i)
+void print_buff(char buffer_output[], int *buffer_i)
 {
 	if (*buffer_i > 0)
-		write(1, &buffer[0], *buffer_i);
+		write(1, &buffer_output[0], *buffer_i);
 
 	*buffer_i = 0;
 }

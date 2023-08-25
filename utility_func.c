@@ -91,4 +91,3 @@ int append_hexa(char ascii, char buffer_output[], int j)
 	
 	return (3);
 }
-
