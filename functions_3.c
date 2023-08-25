@@ -103,7 +103,7 @@ int reverse_print(va_list args, char buffer_output[], int format_flags, int widt
 	char *input_str;
 	int j, char_count = 0;
 
-	UNUSED(buffet_output);
+	UNUSED(buffer_output);
 	UNUSED(format_flags);
 	UNUSED(width);
 	UNUSED(length);
