@@ -5,7 +5,7 @@
  * @format: Formatted string in which to print the arguments.
  * @index: index
  * @list: List of arguments to be printed.
- * @buffer: Buffer array to handle print.
+ * @buffer_output: Buffer array to handle print.
  * @format_flags: Calculates active flags
  * @width: handle width.
  * @precision: Precision specification
@@ -13,26 +13,27 @@
  * Return: 1 or 2;
  */
 
-int handle_print(const char *format, int *index, va_list list, char buffer[],
-int format_flags, int width, int precision, int length)
+int handle_print(const char *format, int *index, va_list list,
+		char buffer_output[], int format_flags, int width,
+		int precision, int length)
 {
 	int x = 0, unknown_len = 0, chars_prnt = -1;
 
-	format_t format_types[] = {
-		{'c', print_char}, {'s', print_string}, {'%', print_percent},
-		{'i', print_int}, {'d', print_int}, {'b', print_binary},
-		{'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
-		{'X', print_hexa_upper}, {'p', print_pointer}, {'S', print_non_printable},
-		{'r', print_reverse}, {'R', print_rot13string}, {'\0', NULL}
+	format format_type[] = {
+		{'c', char_print}, {'s', string_print}, {'%', percent_print},
+		{'i', int_print}, {'d', int_print}, {'b', binary_print},
+		{'u', unsigned_print}, {'o', octal_print}, {'x', hexadecimal_print},
+		{'X', hexa_upper_print}, {'p', pointer_print}, {'S', non_printable_print},
+		{'r', reverse_print}, {'R', rot13_encoded_string_print}, {'\0', NULL}
 	};
-	while (format_types[x].format != '\0')
+	while (format_type[x].format != '\0')
 	{
-		if (format[*index] == format_types[x].format)
-			return (format_types[i].function(list, buffer,
+		if (format[*index] == format_type[x].format)
+			return (format_type[x].function(list, buffer_output,
 					format_flags, width, precision, length));
 		x++;
 	}
-	if (format_types[x].format == '\0')
+	if (format_type[x].format == '\0')
 	{
 		if (format[*index] == '\0')
 			return (-1);

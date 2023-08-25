@@ -121,20 +121,20 @@ int percent_print(va_list args, char buffer_output[], int format_flags,
  * @format_flags: The formatting flags
  * @width: The width specifier
  * @precision: The precision specifier
- * @size: The size specifier
+ * @length: The size specifier
  *
  * Return: Number of characters printed
  */
 
 int int_print(va_list args, char buffer_output[], int format_flags,
-		int width, int precision, int size)
+		int width, int precision, int length)
 {
 	int j = BUFFER_SIZE - 2;
 	int negative_i = 0;
 	long int num = va_arg(args, long int);
 	unsigned long int n;
 
-	num = modify_size(num, size);
+	num = modify_size(num, length);
 
 	if (num == 0)
 		buffer_output[j--] = '0';
@@ -157,7 +157,7 @@ int int_print(va_list args, char buffer_output[], int format_flags,
 	j++;
 
 	return (formatted_number(negative_i, j, buffer_output,
-			format_flags, width, precision, size));
+			format_flags, width, precision, length));
 }
 
 /***************PRINTS BINARY***********************/
