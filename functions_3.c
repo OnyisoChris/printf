@@ -11,7 +11,7 @@
  *
  */
 
-int pointer_print(va_list args, char buffer_output[], int flags, int width, int precision, int size)
+int pointer_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	char extra_char = 0, padding_char = ' ';
 	int index = BUFFER_SIZE -2, length = 2, padding_start = 1;
@@ -20,7 +20,7 @@ int pointer_print(va_list args, char buffer_output[], int flags, int width, int 
 	void *address = va_arg(args, void *);
 
 	UNUSED(width);
-	UNUSED(size);
+	UNUSED(length);
 
 	if (address == NULL)
 		return (write(1, "(null)", 6));
@@ -37,15 +37,15 @@ int pointer_print(va_list args, char buffer_output[], int flags, int width, int 
 		length++;
 	}
 
-	if ((flags & FLAG_ZERO) && !(flags & FLAG_MINUS))
+	if ((format_flags & FLAG_ZERO) && !(format_flags & FLAG_MINUS))
 		padding_char = '0';
-	if (flags & FLAG_PLUS)
+	if (format_flags & FLAG_PLUS)
 		extra_char = '+', length++;
-	else if (flags & FLAG_SPACE)
+	else if (format_flags & FLAG_SPACE)
 		extra_char = ' ', length++;
 	index++;
 
-	return (write_custom_pointer(buffer_output, index, length, flags, padding_char, extra_char, padding_start));
+	return (write_custom_pointer(buffer_output, index, length, format_flags, padding_char, extra_char, padding_start));
 }
 
 /*************PRINTS NON-PRINTABLE CHARACTERS***************/
@@ -60,7 +60,7 @@ int pointer_print(va_list args, char buffer_output[], int flags, int width, int 
  *
  */
 
-int non_printable_print(va_list args, char buffer_output[], int format flags, int width, int precision, int size)
+int non_printable_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	int j = 0; hex_offset = 0;
 	char *input_str = va_arg(args, char *);
@@ -68,7 +68,7 @@ int non_printable_print(va_list args, char buffer_output[], int format flags, in
 	UNUSED(format_flags);
 	UNUSED(width);
 	UNUSED(precision);
-	UNUSED(size);
+	UNUSED(length);
 	
 	if (input_str == NULL)
 		return (write(1, "(null)", 9));
@@ -97,16 +97,16 @@ int non_printable_print(va_list args, char buffer_output[], int format flags, in
  *
  */
 
-int reverse_print(va_list args, char buffer_output[], int flags, int width, int precision,int size)
+int reverse_print(va_list args, char buffer_output[], int format_flags, int width, int precision,int length)
 
 {
 	char *input_str;
 	int j, char_count = 0;
 
 	UNUSED(buffet_output);
-	UNUSED(flags);
+	UNUSED(format_flags);
 	UNUSED(width);
-	UNUSED(size);
+	UNUSED(length);
 
 	input_str = va_arg(args, char *);
 
@@ -141,7 +141,7 @@ int reverse_print(va_list args, char buffer_output[], int flags, int width, int 
  *
  */
 
-int rot13_encoded_string_print(va_list args, char buffer_output[], int flags, int width, int precision, int size)
+int rot13_encoded_string_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	char temp;
 	char *input_str;
@@ -151,10 +151,10 @@ int rot13_encoded_string_print(va_list args, char buffer_output[], int flags, in
 	char mapping_to[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
 	UNUSED(buffer_output);
-	UNUSED(flags);
+	UNUSED(format_flags);
 	UNUSED(width);
 	UNUSED(precision);
-	UNUSED(size);
+	UNUSED(length);
 
 	input_str = va_arg(args, char *);
 

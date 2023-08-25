@@ -155,16 +155,16 @@ int int_print(va_list args, char buffer_output[], int format_flags, int width, i
  *
  */
 
-int binary_print(va_list args, char buf[], int flags, int width, int precision, int size)
+int binary_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	unsigned int num, i, j, sum;
 	unsigned int binary_dig[32];
 	int print_count;
 
-	UNUSED(flags);
+	UNUSED(format_flags);
 	UNUSED(width);
 	UNUSED(precision);
-	UNUSED(size);
+	UNUSED(length);
 
 	num = va_arg(args, unsigned int);
 	i = 2147483648;

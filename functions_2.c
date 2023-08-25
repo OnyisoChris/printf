@@ -11,7 +11,7 @@
  *
  */
 
-int unsigned_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int unsigned_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	int j = BUFFER_SIZE - 2;
 	unsigned long int n = va_arg(args, unsigned long int);
@@ -31,7 +31,7 @@ int unsigned_print(va_list args, char buffer_output[], int format_flags, int wid
 
 	j++;
 
-	return (unsigned_write(0, j, buffer_output, format_flags, width, precision, size));
+	return (unsigned_write(0, j, buffer_output, format_flags, width, precision, length));
 }
 
 
@@ -47,7 +47,7 @@ int unsigned_print(va_list args, char buffer_output[], int format_flags, int wid
  *
  */
 
-int octal_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int octal_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
 	int j = BUFFER_SIZE - 2;
 	unsigned long int n = va_arg(args, unsigned long int);
@@ -73,7 +73,7 @@ int octal_print(va_list args, char buffer_output[], int format_flags, int width,
 
 	j++;
 
-	return (unsigned_octal_write(0, j, buffer_output, format_flags, field_width, precision, size);
+	return (unsigned_octal_write(0, j, buffer_output, format_flags, field_width, precision, length);
 }
 
 /**********PRINTS UNSIGNED HEXADECIMAL NUMBER*****************/
@@ -87,9 +87,9 @@ int octal_print(va_list args, char buffer_output[], int format_flags, int width,
  *
  */
 
-int hexadecimal_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int hexadecimal_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
-return (hexa_print(args, "0123456789abcdef", buffer_output, format_flags, 'x', width, precision, size));
+return (hexa_print(args, "0123456789abcdef", buffer_output, format_flags, 'x', width, precision, length));
 }
 
 /*******PRINTS UNSIGNED HEXADECIMAL NUMBER IN UPPERCASE*******/
@@ -103,9 +103,9 @@ return (hexa_print(args, "0123456789abcdef", buffer_output, format_flags, 'x', w
  *
  */
 
-int hexa_upper_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int hexa_upper_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
 {
-return (hexa_print(args, "0123456789ABCDEF", buffer_output, format_flags, 'X', width, precision, size));
+return (hexa_print(args, "0123456789ABCDEF", buffer_output, format_flags, 'X', width, precision, length));
 }
 
 /***PRINTS HEXADEC IN UPPER OR LOWER CASE************/
@@ -119,7 +119,7 @@ return (hexa_print(args, "0123456789ABCDEF", buffer_output, format_flags, 'X', w
  *
  */
 
-int hexa_print(va_list args, char buffer_result[], int format_flags, int width, int precision, int size)
+int hexa_print(va_list args, char buffer_result[], int format_flags, int width, int precision, int length)
 {
 	int j = BUFFER_SIZE -2;
 	unsigned long int n = va_arg(args, unsigned long int);
@@ -148,5 +148,5 @@ int hexa_print(va_list args, char buffer_result[], int format_flags, int width, 
 
 	j++;
 
-	return (write_result(0, j, buffer_result, format_flags_width, precision, size));
+	return (write_result(0, j, buffer_result, format_flags_width, precision, length));
 }

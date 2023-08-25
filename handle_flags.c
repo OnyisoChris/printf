@@ -11,7 +11,8 @@ int handle_flags(const char *format, int *p)
 	int x, crnt_index;
 	int format_flags = 0;
 	const char FLAGS_CH[] = {'+', ' ', '#', '0', '-', '\0'};
-	const int FLAGS_ARR[] = {FLAG_PLUS, FLAG_SPACE, FLAG_HASH, FLAG_ZERO, FLAG_MINUS, 0};
+	const int FLAGS_ARR[] = {FLAG_PLUS, FLAG_SPACE, FLAG_HASH,
+		FLAG_ZERO, FLAG_MINUS, 0};
 
 	crnt_index = *p + 1;
 	while (format[crnt_index] != '\0')

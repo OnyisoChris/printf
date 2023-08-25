@@ -3,7 +3,7 @@
 /**
  * handle_precision - extract and calculates the precision for printing
  * @format: formatted string in which the arguments will be printed.
- * @p: A pointer to an integer that represents the current index in the format string.
+ * @p: Pointer to an integer representing current index in format string.
  * @list: list of arguments
  * Return: Precision
  */
