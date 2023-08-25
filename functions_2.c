@@ -3,15 +3,19 @@
 /*****************PRINTS UNSIGNED NUMBER*****************/
 
 /**
+ * unsigned_print - Prints an unsigned integer
+ * @args: The va_list containing the integer argument
+ * @buffer_output: The buffer to store the output
+ * @format_flags: The formatting flags
+ * @width: The width specifier
+ * @precision: The precision specifier
+ * @length: The length specifier
  *
- *
- *
- *
- *
- *
+ * Return: Number of characters printed
  */
 
-int unsigned_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int unsigned_print(va_list args, char buffer_output[], int format_flags,
+		int width, int precision, int length)
 {
 	int j = BUFFER_SIZE - 2;
 	unsigned long int n = va_arg(args, unsigned long int);
@@ -21,7 +25,7 @@ int unsigned_print(va_list args, char buffer_output[], int format_flags, int wid
 	if (n == 0)
 		buffer_output[j--] = '0';
 
-	buffer_output[BUFFER_SIZE -1] = '\0';
+	buffer_output[BUFFER_SIZE - 1] = '\0';
 
 	while (n > 0)
 	{
@@ -31,23 +35,27 @@ int unsigned_print(va_list args, char buffer_output[], int format_flags, int wid
 
 	j++;
 
-	return (unsigned_write(0, j, buffer_output, format_flags, width, precision, length));
+	return (unsigned_write(0, j, buffer_output, format_flags,
+				width, precision, length));
 }
 
 
 /****************PRINTS UNSIGNED OCTAL NUMBER************/
 
 /**
+ * octal_print - Prints an unsigned integer in octal format
+ * @args: The va_list containing the integer argument
+ * @buffer_output: The buffer to store the output
+ * @format_flags: The formatting flags
+ * @width: The width specifier
+ * @precision: The precision specifier
+ * @length: The length specifier
  *
- *
- *
- *
- *
- *
- *
+ * Return: Number of characters printed
  */
 
-int octal_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int octal_print(va_list args, char buffer_output[], int format_flags,
+		int width, int precision, int length)
 {
 	int j = BUFFER_SIZE - 2;
 	unsigned long int n = va_arg(args, unsigned long int);
@@ -73,55 +81,72 @@ int octal_print(va_list args, char buffer_output[], int format_flags, int width,
 
 	j++;
 
-	return (unsigned_octal_write(0, j, buffer_output, format_flags, field_width, precision, length);
+	return (unsigned_octal_write(0, j, buffer_output, format_flags,
+				field_width, precision, length));
 }
 
 /**********PRINTS UNSIGNED HEXADECIMAL NUMBER*****************/
 
 /**
+ * hexadecimal_print - Prints an unsigned integer in
+ * hexadecimal format (lowercase)
+ * @args: The va_list containing the integer argument
+ * @buffer_output: The buffer to store the output
+ * @format_flags: The formatting flags
+ * @width: The width specifier
+ * @precision: The precision specifier
+ * @length: The length specifier
  *
- *
- *
- *
- *
- *
+ * Return: Number of characters printed
  */
 
-int hexadecimal_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int hexadecimal_print(va_list args, char buffer_output[], int format_flags,
+		int width, int precision, int length)
 {
-return (hexa_print(args, "0123456789abcdef", buffer_output, format_flags, 'x', width, precision, length));
+return (hexa_print(args, "0123456789abcdef", buffer_output,
+			format_flags, 'x', width, precision, length));
 }
 
 /*******PRINTS UNSIGNED HEXADECIMAL NUMBER IN UPPERCASE*******/
 
 /**
+ * hexa_upper_print - Prints an unsigned integer in
+ * hexadecimal format (uppercase)
+ * @args: The va_list containing the integer argument
+ * @buffer_output: The buffer to store the output
+ * @format_flags: The formatting flags
+ * @width: The width specifier
+ * @precision: The precision specifier
+ * @length: The length specifier
  *
- *
- *
- *
- *
- *
+ * Return: Number of characters printed
  */
 
-int hexa_upper_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int hexa_upper_print(va_list args, char buffer_output[], int format_flags,
+		int width, int precision, int length)
 {
-return (hexa_print(args, "0123456789ABCDEF", buffer_output, format_flags, 'X', width, precision, length));
+return (hexa_print(args, "0123456789ABCDEF", buffer_output, format_flags, 'X',
+			width, precision, length));
 }
 
 /***PRINTS HEXADEC IN UPPER OR LOWER CASE************/
 
 /**
+ * hexa_print - Prints an unsigned integer in hexadecimal format
+ * @args: The va_list containing the integer argument
+ * @buffer_result: The buffer to store the output
+ * @format_flags: The formatting flags
+ * @width: The width specifier
+ * @precision: The precision specifier
+ * @length: The length specifier
  *
- *
- *
- *
- *
- *
+ * Return: Number of characters printed
  */
 
-int hexa_print(va_list args, char buffer_result[], int format_flags, int width, int precision, int length)
+int hexa_print(va_list args, char buffer_result[], int format_flags,
+		int width, int precision, int length)
 {
-	int j = BUFFER_SIZE -2;
+	int j = BUFFER_SIZE - 2;
 	unsigned long int n = va_arg(args, unsigned long int);
 	unsigned long int initial_n = n;
 
@@ -148,5 +173,6 @@ int hexa_print(va_list args, char buffer_result[], int format_flags, int width, 
 
 	j++;
 
-	return (write_result(0, j, buffer_result, format_flags_width, precision, length));
+	return (write_result(0, j, buffer_result,
+				format_flags_width, precision, length));
 }

@@ -13,26 +13,31 @@
  * Return: Number of characters written
  */
 
-int char_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int char_print(va_list args, char buffer_output[], int format_flags,
+		int width, int precision, int length)
 {
 	char c = va_arg(args, int);
 
-	return (format_and_write_char(c, buffer_output, format_flags, width, precision, length);
+	return (format_and_write_char(c, buffer_output,
+				format_flags, width, precision, length));
 }
 
 /************************PRINTS STRINGS*******************/
 
 /**
+ * string_print - Prints a string
+ * @args: The va_list containing the string argument
+ * @buffer_output: The buffer to store the output
+ * @format_flags: The formatting flags
+ * @width: The width specifier
+ * @precision: The precision specifier
+ * @length: The length specifier
  *
- *
- *
- *
- *
- *
- *
+ * Return: Number of characters printed
  */
 
-int string_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int string_print(va_list args, char buffer_output[], int format_flags,
+		int width, int precision, int length)
 {
 	int str_length = 0, j;
 	char *str_data = va_arg(args, char *);
@@ -79,15 +84,19 @@ int string_print(va_list args, char buffer_output[], int format_flags, int width
 /************************PRINTS PERCENT SIGN****************/
 
 /**
+ * percent_print - Prints the percent character
+ * @args: The va_list (unused)
+ * @buffer_output: The buffer to store the output (unused)
+ * @format_flags: The formatting flags (unused)
+ * @width: The width specifier (unused)
+ * @precision: The precision specifier (unused)
+ * @length: The length specifier (unused)
  *
- *
- *
- *
- *
- *
+ * Return: Number of characters printed
  */
 
-int percent_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int percent_print(va_list args, char buffer_output[], int format_flags,
+		int width, int precision, int length)
 {
 	UNUSED(args);
 	UNUSED(buffer_output);
@@ -100,21 +109,25 @@ int percent_print(va_list args, char buffer_output[], int format_flags, int widt
 
 	int write_chars = write(1, &percent_character, 1);
 
-	return write_chars;
+	return (write_chars);
 }
 
 /****************************PRINTS INTEGER*******************/
 
 /**
+ * int_print - Prints an integer in decimal format
+ * @args: The va_list containing the integer argument
+ * @buffer_output: The buffer to store the output
+ * @format_flags: The formatting flags
+ * @width: The width specifier
+ * @precision: The precision specifier
+ * @size: The size specifier
  *
- *
- *
- *
- *
- *
+ * Return: Number of characters printed
  */
 
-int int_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int size)
+int int_print(va_list args, char buffer_output[], int format_flags,
+		int width, int precision, int size)
 {
 	int j = BUFFER_SIZE - 2;
 	int negative_i = 0;
@@ -129,33 +142,40 @@ int int_print(va_list args, char buffer_output[], int format_flags, int width, i
 	buffer_output[BUFFER_SIZE - 1] = '\0';
 	n = (unsigned long int)num;
 
-	if (num < 0) {
+	if (num < 0)
+	{
 		n = (unsigned long int)(-1) * num;
 		negative_i = 1;
 	}
 
-	while (n > 0) {
+	while (n > 0)
+	{
 		buffer_output[j--] = (n % 10) + '0';
 		n /= 10;
 	}
 
 	j++;
 
-	return formatted_number(negative_i, j, buffer_output, format_flags, width, precision, size);
+	return (formatted_number(negative_i, j, buffer_output,
+			format_flags, width, precision, size));
 }
 
 /***************PRINTS BINARY***********************/
 
 /**
+ * binary_print - Prints an unsigned integer in binary format
+ * @args: The va_list containing the integer argument
+ * @buffer_output: The buffer to store the output
+ * @format_flags: The formatting flags
+ * @width: The width specifier
+ * @precision: The precision specifier
+ * @length: The length specifier
  *
- *
- *
- *
- *
- *
+ * Return: Number of characters printed
  */
 
-int binary_print(va_list args, char buffer_output[], int format_flags, int width, int precision, int length)
+int binary_print(va_list args, char buffer_output[],
+		int format_flags, int width, int precision, int length)
 {
 	unsigned int num, i, j, sum;
 	unsigned int binary_dig[32];
@@ -168,7 +188,9 @@ int binary_print(va_list args, char buffer_output[], int format_flags, int width
 
 	num = va_arg(args, unsigned int);
 	i = 2147483648;
+
 	binary_dig[0] = num / i;
+
 	for (j = 1; j < 32; j++)
 	{
 		i /= 2;
@@ -180,6 +202,7 @@ int binary_print(va_list args, char buffer_output[], int format_flags, int width
 		if (sum || j == 31)
 		{
 			char binary_char = '0' + binary_dig[j];
+
 			write(1, &binary_char, 1);
 			print_count++;
 		}
