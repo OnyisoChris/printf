@@ -39,13 +39,7 @@ struct format
 * @format_type: variable type
 */
 
-typedef struct format_type {
-	{'c', char_print}, {'s', string_print}, {'%', percent_print},
-		{'i', int_print}, {'d', int_print}, {'b', binary_print},
-		{'u', unsigned_print}, {'o', octal_print}, {'x', hexadecimal_print},
-		{'X', hexa_upper_print}, {'p', pointer_print}, {'S', non_printable_print},
-		{'r', reverse_print}, {'R', rot13_encoded_string_print}, {'\0', NULL}
-} format;
+typedef struct format format_type;
 
 int _printf(const char *format, ...);
 int handle_print(const char *format, int *index, va_list list, char buffer_output[], int format_flags, int width,int precision, int length);
