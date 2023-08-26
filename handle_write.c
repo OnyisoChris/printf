@@ -110,7 +110,7 @@ int write_digit(int index, char buffer_output[], int format_flags, int width,
 		len++;
 	if (width > len)
 	{
-		for (x = 1; x < width - length + 1; x++)
+		for (x = 1; x < width - len + 1; x++)
 			buffer_output[x] = pdn;
 		buffer_output[x] = '\0';
 		if (format_flags & FLAG_MINUS && pdn == ' ')

@@ -19,29 +19,30 @@
 #define L_LONG (1 << 1)
 
 /**
-* struct format - group together multiple variables of different types
-*
-* @format: character that represents the format
+* struct frmt - group together multiple variables of different types
+* @frmt: character that represents the format
 * @function: The function pointer that points to a function
 */
 
-struct format
+struct frmt
 {
-	char format;
+	char frmt;
 	int (*function)(va_list, char[], int, int, int, int);
 }
 
 /**
-* typedef struct format - defines format types
+* typedef struct frmt - defines format types
 *
-* @format: The character that represents the format
-* @format_type: variable type
+* @frmt: The character that represents the format
+* @frmt_t: associated function
 */
 
-typedef struct format format_type;
+typedef struct {
+	frmt
+} frmt_t;
 
 int _printf(const char *format, ...);
-int handle_print(const char *format, int *index, va_list args,
+int handle_print(const char *frmt, int *index, va_list args,
 		char buffer_output[], int format_flags, int width,
 		int precision, int length);
 

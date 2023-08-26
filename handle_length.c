@@ -21,12 +21,12 @@ int handle_length(const char *format, int *p)
 			length = L_SHORT;
 			break;
 		default:
-			*P = crnt_index - 1;
+			*p = crnt_index - 1;
 			break;
 	}
 
 	if (length != 0)
-		*P = crnt_index;
+		*p = crnt_index;
 
 	return (length);
 }

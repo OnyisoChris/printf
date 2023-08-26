@@ -31,5 +31,5 @@ int handle_flags(const char *format, int *p)
 	}
 	*p = crnt_index - 1;
 
-return (flags);
+return (format_flags);
 }
