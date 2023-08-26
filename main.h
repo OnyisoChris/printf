@@ -38,7 +38,21 @@ struct frmt
 */
 
 typedef struct {
-	frmt
+	'c' char_print frmt_typ[0];
+	's' string_print frmt_typ[1];
+	'%' percent_print frmt_typ[2];
+	'i' int_print frmt_typ[3];
+	'd' int_print frmt_typ[4];
+	'b' binary_print frmt_typ[5];
+	'u' unsigned_print frmt_typ[6];
+	'o' octal_print frmt_typ[7];
+	'x' hexadecimal_print frmt_typ[8];
+	'X' hexa_upper_print frmt_typ[9];
+	'p' pointer_print frmt_typ[10];
+	'S' non_printable_print frmt_typ[11];
+	'r' reverse_print frmt_typ[12];
+	'R' rot13_encoded_string_print frmt_typ[13];
+	'\0' NULL frmt_typ[14];
 } frmt_t;
 
 int _printf(const char *format, ...);
