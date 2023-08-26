@@ -4,7 +4,7 @@
  * handle_print - Prints an argument based on its type
  * @format: Formatted string in which to print the arguments.
  * @index: index
- * @list: List of arguments to be printed.
+ * @args: List of arguments to be printed.
  * @buffer_output: Buffer array to handle print.
  * @format_flags: Calculates active flags
  * @width: handle width.
@@ -13,7 +13,7 @@
  * Return: 1 or 2;
  */
 
-int handle_print(const char *format, int *index, va_list list,
+int handle_print(const char *format, int *index, va_list args,
 		char buffer_output[], int format_flags, int width,
 		int precision, int length)
 {
@@ -29,7 +29,7 @@ int handle_print(const char *format, int *index, va_list list,
 	while (format_type[x].format != '\0')
 	{
 		if (format[*index] == format_type[x].format)
-			return (format_type[x].function(list, buffer_output,
+			return (format_type[x].function(args, buffer_output,
 					format_flags, width, precision, length));
 		x++;
 	}

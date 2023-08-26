@@ -4,11 +4,11 @@
  * handle_width - Calculates the width for printing
  * @format: Formatted string in which to print the arguments
  * @p: a pointer to an integer representing the current index
- * @list: list of arguments
+ * @args: list of arguments
  * Return: width
  */
 
-int handle_width(const char *format, int *p, va_list list)
+int handle_width(const char *format, int *p, va_list args)
 {
 	int crnt_index = *p + 1;
 	int width = 0;
@@ -23,7 +23,7 @@ int handle_width(const char *format, int *p, va_list list)
 		else if (format[crnt_index] == '*')
 		{
 			crnt_index++;
-			width = va_arg(list, int);
+			width = va_arg(args, int);
 			break;
 		}
 		else

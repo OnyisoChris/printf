@@ -92,9 +92,8 @@ int write_digit_handle(int is_negative, int index, char buffer_output[],
  * Return: number of printed characters
  */
 
-int write_digit(int index, char buffer_output[],
-	int format_flags, int width, int precision,
-	int len, char pdn, char ex_ch)
+int write_digit(int index, char buffer_output[], int format_flags, int width,
+		int precision, int len, char pdn, char ex_ch)
 {
 	int x, pdn_s = 1;
 
@@ -131,13 +130,13 @@ int write_digit(int index, char buffer_output[],
 			if (ex_ch)
 				buffer_output[--pdn_s] = ex_ch;
 			return (write(1, &buffer_output[pdn_s], x - pdn_s) +
-				write(1, &buffer_output[index], len - (1 - pdn_s)));
-		}
+				write(1, &buffer_output[index], len - (1 - pdn_s)));	}
 	}
 	if (ex_ch)
 		buffer_output[--index] = ex_ch;
 	return (write(1, &buffer_output[index], len));
 }
+
 /**Write unsigned**/
 /**
  * unsigned_write - writes an unsigned number

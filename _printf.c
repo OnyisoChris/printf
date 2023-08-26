@@ -13,13 +13,13 @@ int _printf(const char *format, ...)
 	int x, prnt = 0, chars_prnt = 0;
 	int format_flags, width, precision, length, buffer_i = 0;
 
-	va_list list;
+	va_list args;
 	char buffer_output[BUFFER_SIZE];
 
 	if (format == NULL)
 		return (-1);
 
-	va_start(list, format);
+	va_start(args, format);
 
 	for (x = 0; format && format[x] != '\0'; x++)
 	{
@@ -34,11 +34,11 @@ int _printf(const char *format, ...)
 		{
 			print_buff(buffer_output, &buffer_i);
 			format_flags = handle_flags(format, &x);
-			width = handle_width(format, &x, list);
-			precision = handle_precision(format, &x, list);
+			width = handle_width(format, &x, args);
+			precision = handle_precision(format, &x, args);
 			length = handle_length(format, &x);
 			++x;
-			prnt = handle_print(format, &x, list, buffer_output,
+			prnt = handle_print(format, &x, args, buffer_output,
 				format_flags, width, precision, length);
 			if (prnt == -1)
 				return (-1);
@@ -48,7 +48,7 @@ int _printf(const char *format, ...)
 
 	print_buff(buffer_output, &buffer_i);
 
-	va_end(list);
+	va_end(args);
 
 	return (chars_prnt);
 }

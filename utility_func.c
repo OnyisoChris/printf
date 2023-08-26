@@ -3,18 +3,18 @@
 /**
  * modify_size - Modifies a number to specified size
  * @n: number to be modified
- * @size: desired size specifier
+ * @length: desired size specifier
  *
  * Return: modified number
  */
 
 /***FOR PRINT INT**/
 
-long int modify_size(long int n, int size)
+long int modify_size(long int n, int length)
 {
-	if (size == L_LONG)
+	if (length == L_LONG)
 		return (n);
-	else if (size == L_SHORT)
+	else if (length == L_SHORT)
 		return ((short)n);
 	return ((int)n);
 }
@@ -22,18 +22,18 @@ long int modify_size(long int n, int size)
 /**
  * size_convert - converts number to specified size
  * @n: number to be converted
- * @size: desired size specified
+ * @length: desired size specified
  *
  * Return: converted number with size specified
  */
 
 /****FOR PRINT HEXA UPPER OR LOWER****/
 
-long int size_convert(unsigned long int n, int size)
+long int size_convert(unsigned long int n, int length)
 {
-	if (size == L_LONG)
+	if (length == L_LONG)
 		return (n);
-	else if (size == L_SHORT)
+	else if (length == L_SHORT)
 		return ((unsigned short)n);
 	return ((unsigned int)n);
 }

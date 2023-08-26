@@ -4,11 +4,11 @@
  * handle_precision - extract and calculates the precision for printing
  * @format: formatted string in which the arguments will be printed.
  * @p: Pointer to an integer representing current index in format string.
- * @list: list of arguments
+ * @args: list of arguments
  * Return: Precision
  */
 
-int handle_precision(const char *format, int *p, va_list list)
+int handle_precision(const char *format, int *p, va_list args)
 {
 	int crnt_index = *p + 1;
 	int precision = -1;
@@ -31,7 +31,7 @@ int handle_precision(const char *format, int *p, va_list list)
 				break;
 			case '*':
 				crnt_index++;
-				precision = va_arg(list, int);
+				precision = va_arg(args, int);
 				*p = crnt_index - 1;
 				return (precision);
 			default:
@@ -42,4 +42,3 @@ int handle_precision(const char *format, int *p, va_list list)
 	*p = crnt_index - 1;
 	return (precision);
 }
-
