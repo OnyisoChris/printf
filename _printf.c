@@ -1,67 +1,107 @@
 #include "main.h"
+#include <unistd.h>
+#include <stdarg.h>
+#include <stdbool.h>  /**Include for boolean data type**/
 
-void print_buff(char buffer_output[], int *buffer_i);
+static void print_int(int num)
+{
+    char int_buffer[INT_BUF_SIZE];
+    int buffer_index = INT_BUF_SIZE - 1;
+    int is_negative = 0;
 
-/**
- * _printf - print an output and write it to standard output
- * @format: is a character string
- * Return: the number of characters printed
- */
+    if (num < 0)
+    {
+        is_negative = 1;
+        num = -num;
+    }
+
+    do
+    {
+        int_buffer[buffer_index] = (num % 10) + '0';
+        num /= 10;
+        buffer_index--;
+    } while (num != 0);
+
+    if (is_negative)
+    {
+        int_buffer[buffer_index] = '-';
+        buffer_index--;
+    }
+
+    write(1, &int_buffer[buffer_index + 1], INT_BUF_SIZE - buffer_index - 1);
+}
 
 int _printf(const char *format, ...)
 {
-	int x, prnt = 0, chars_prnt = 0;
-	int format_flags, width, precision, length, buffer_i = 0;
+    int count = 0;
+    va_list args;
 
-	va_list args;
-	char buffer_output[BUFFER_SIZE];
+    va_start(args, format);
 
-	if (format == NULL)
-		return (-1);
-
-	va_start(args, format);
-
-	for (x = 0; format && format[x] != '\0'; x++)
-	{
-		if (format[x] != '%')
-		{
-			buffer_output[buffer_i++] = format[x];
-			if (buffer_i == BUFFER_SIZE)
-				print_buff(buffer_output, &buffer_i);
-			chars_prnt++;
-		}
-		else
-		{
-			print_buff(buffer_output, &buffer_i);
-			format_flags = handle_flags(format, &x);
-			width = handle_width(format, &x, args);
-			precision = handle_precision(format, &x, args);
-			length = handle_length(format, &x);
-			++x;
-			prnt = handle_print(format, &x, args, buffer_output,
-				format_flags, width, precision, length);
-			if (prnt == -1)
-				return (-1);
-			chars_prnt += prnt;
-		}
-	}
-
-	print_buff(buffer_output, &buffer_i);
-
-	va_end(args);
-
-	return (chars_prnt);
+    while (*format)
+    {
+        if (*format == '%')
+        {
+            format++;
+            switch (*format)
+            {
+                case 'c':
+                {
+                    char c = (char)va_arg(args, int);
+                    write(1, &c, 1);
+                    count++;
+                    break;
+                }
+                case 's':
+                {
+                    const char *s = va_arg(args, const char *);
+                    while (*s)
+                    {
+                        write(1, s, 1);
+                        s++;
+                        count++;
+                    }
+                    break;
+                }
+                case 'd': case 'i':
+                {
+                    int num = va_arg(args, int);
+                    print_int(num);
+                    count += INT_BUF_SIZE;
+                    break;
+                }
+                case '%':
+                {
+                    char percent = '%';
+                    write(1, &percent, 1);
+                    count++;
+                    break;
+                }
+                case 'r':
+                {
+                    /**Print "Unknown: [%r]"**/
+                    write(1, "Unknown: [%r]", 13);  /**13 is the length of the output**/
+                    count += 13;
+                    break;
+                }
+                default:
+                {
+                    /**Unknown specifier: print '%' and the current character**/
+                    write(1, "%", 1);
+                    write(1, format, 1);
+                    count += 2;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            write(1, format, 1);
+            count++;
+        }
+        format++;
+    }
+    va_end(args);
+    return count;
 }
 
-/**
- * print_buff - Prints the contents of the buffer if it exist
- * @buffer_output: Array of chars
- * @buffer_i: Index at which to add next char, represents the length.
- */
-void print_buff(char buffer_output[], int *buffer_i)
-{
-	if (*buffer_i > 0)
-		write(1, &buffer_output[0], *buffer_i);
-
-	*buffer_i = 0;
-}
