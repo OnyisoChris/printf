@@ -3,9 +3,10 @@
 #include <stdarg.h>
 #include <stdbool.h>
 
-/**@num: The integer to be printed**/
+/**@num: integer to be computed **/
 
 static void print_int(int num);
+
 /**
  * _printf - Print formatted output
  * @format: format string
