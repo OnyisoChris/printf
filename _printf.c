@@ -61,11 +61,6 @@ int _printf(const char *format, ...)
 						count++;
 						break;
 						}
-				case 'r': {
-						write(1, "Unknown: [%r]", 13);
-						count += 13;
-						break;
-						}
 				default: {
 						write(1, "%", 1);
 						write(1, format, 1);
