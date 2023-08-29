@@ -8,6 +8,5 @@
 #define INT_BUF_SIZE 1024
 
 int _printf(const char *format, ...);
-static void print_int(int num);
 
 #endif
